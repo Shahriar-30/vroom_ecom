@@ -1,8 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Logo from "../../../../components/Logo";
 
 const Regi = () => {
+  let [user, setUser] = useState({
+    name: "",
+    email: "",
+    password: "",
+    re_password: "",
+  });
+
+  const handelSubmit = (e) => {
+    e.preventDefault();
+    if (user.name = '' || user.email || user.password || user.re_password) {
+      alert("na monna na");
+    }else{
+      alert("cool")
+    }
+  };
+
   return (
     <>
       <div className="w-full flex flex-col items-center justify-center p-4">
@@ -40,6 +56,8 @@ const Regi = () => {
                 minlength="3"
                 maxlength="30"
                 title="Only letters, numbers or dash"
+                value={user.name}
+                onChange={(e) => setUser({ ...user, name: e.target.value })}
               />
             </label>
             <p className="validator-hint hidden">
@@ -68,7 +86,13 @@ const Regi = () => {
                   <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
                 </g>
               </svg>
-              <input type="email" placeholder="mail@site.com" required />
+              <input
+                type="email"
+                placeholder="mail@site.com"
+                required
+                vlaue={user.email}
+                onChange={(e) => setUser({ ...user, email: e.target.value })}
+              />
             </label>
             <div className="validator-hint hidden">
               Enter valid email address
@@ -104,13 +128,15 @@ const Regi = () => {
                 required
                 placeholder="Password"
                 minlength="8"
+                value={user.password}
+                onChange={(e) => setUser({ ...user, password: e.target.value })}
               />
             </label>
             <p className="validator-hint hidden">Must have 8 characters</p>
           </div>
 
-           {/* password input code */}
-           <div>
+          {/* re-----password input code */}
+          <div>
             <label className="input validator ">
               <svg
                 className="h-[1em] opacity-50"
@@ -138,6 +164,8 @@ const Regi = () => {
                 required
                 placeholder="Re-Password"
                 minlength="8"
+                value={user.re_password}
+                onChange={(e) => setUser({ ...user, re_password: e.target.value })}
               />
             </label>
             <p className="validator-hint hidden">Must have 8 characters</p>
@@ -146,9 +174,7 @@ const Regi = () => {
           {/* submit code */}
           <button
             className="btn btn-xs sm:btn-sm md:btn-md lg:btn-lg xl:btn-xl py-4 text-[16px] text-white bg-blue-500"
-            onClick={() => {
-              alert("hi");
-            }}
+            onClick={handelSubmit}
           >
             Create Account !
           </button>
